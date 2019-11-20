@@ -13,7 +13,7 @@ public interface UserMapper {
     int insertByall(User user);
     int updateById(User user);
     User selectById(long id);
-    User selectById1(long id);
+
   //jsdkfklasjflksjdlfjlskjfklsf
     //jsdkfklasjflksjdlfjlskjfklsf
     //jsdkfklasjflksjdlfjlskjfklsf

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<!--    <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/webjars/jquery/3.3.1-1/jquery.js"></script>-->
+    <script type="text/javascript" th:src="@{/webjars/jquery/3.3.1-1/jquery.js}"></script>
+    <!-- Bootstrap core CSS -->
+    <link href="asserts/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.0.0/css/bootstrap.css}" rel="stylesheet">
+
+</head>
+<body>
+
+
+<div><a href="/user/addh">添加用户</a></div>
+<table border="1px" >
+    <tr>
+        <td>编号</td>
+        <td>姓名</td>
+        <td>密码</td>
+        <td colspan="2" >操作</td>
+    </tr>
+
+    <tr  th:each="emp : ${list}" >
+        <td th:text="${emp.usercode}">    </td>
+        <td th:text="${emp.username}"></td>
+        <td th:text="${emp.userpassword}"></td>
+        <td > <a  href="javascript:;"  th:class="del" th:val="${emp.id}">删除</a></td>
+        <td > <a  th:href="@{/user/updateh/}+${emp.id}"  th:class="update" >修改</a></td>
+
+    </tr>
+
+</table>
+
+      <a  th:if="${curNo!=1}" th:href="@{/user/list?pageNo=}+${curNo-1}">上一页</a>
+      当前页 <span  th:text="${curNo}"></span>
+      总页数 <span th:text="${totalcount}"></span>
+<a  th:if="${curNo!=totalcount}" th:href="@{/user/list?pageNo=}+${curNo+1}">下一页</a>
+
+ 
+
+<script  type="text/javascript">
+    $(function () {
+        $(".del").click(function () {
+            var sta = $(this).attr("val");
+            var  stapan = $(this).parent().parent();
+            alert(sta)
+            $.post("/user/del/" + sta, function (data) {
+                if (data == "成功") {
+                     stapan.remove();
+                    alert("删除成功")
+                } else {
+
+                    alert("删除失败")
+                }
+            }, "text");
+
+        })
+    })
+
+</script>
+</body>
+</html>

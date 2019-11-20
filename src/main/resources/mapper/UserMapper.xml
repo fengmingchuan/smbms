@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.bdqn.dao.smbms2.dao.UserMapper">
+    <resultMap id="BaseResultMap" type="User" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="userCode" property="usercode" jdbcType="VARCHAR" />
+        <result column="userName" property="username" jdbcType="VARCHAR" />
+        <result column="userPassword" property="userpassword" jdbcType="VARCHAR" />
+       <!-- <result column="gender" property="gender" jdbcType="INTEGER" />
+        <result column="birthday" property="birthday" jdbcType="DATE" />
+        <result column="phone" property="phone" jdbcType="VARCHAR" />
+        <result column="address" property="address" jdbcType="VARCHAR" />
+        <result column="userRole" property="userrole" jdbcType="INTEGER" />
+        <result column="createdBy" property="createdby" jdbcType="BIGINT" />
+        <result column="creationDate" property="creationdate" jdbcType="TIMESTAMP" />
+        <result column="modifyBy" property="modifyby" jdbcType="BIGINT" />
+        <result column="modifyDate" property="modifydate" jdbcType="TIMESTAMP" />
+        <result column="idPicPath" property="idpicpath" jdbcType="VARCHAR" />
+        <result column="wordPicPath" property="wordpicpath" jdbcType="VARCHAR" />-->
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+    id, userCode, userName, userPassword/*, gender, birthday, phone, address, userRole,
+    createdBy, creationDate, modifyBy, modifyDate, idPicPath, wordPicPath*/
+  </sql>
+    <select id="selectByAll" resultMap="BaseResultMap"  >
+        select
+        <include refid="Base_Column_List" />
+        from smbms_user  order by id desc
+    </select>
+  <select id="selectById" resultType="user" parameterType="java.lang.Long">
+
+      select * from  smbms_user where id=#{id}
+
+  </select>
+    <delete id="deleteById"  >
+    delete from smbms_user
+    where id =  #{id}
+  </delete>
+
+
+    <insert id="insertByall" parameterType="user" >
+    insert into smbms_user (userCode, userName, userPassword)
+    values (#{usercode}, #{username}, #{userpassword})
+  </insert>
+
+
+
+
+
+    <update id="updateById" parameterType="user" >
+        update smbms_user
+        set
+        userCode = #{usercode},
+        userName = #{username},
+        userPassword =  #{userpassword}
+        where id = #{id}
+    </update>
+</mapper>

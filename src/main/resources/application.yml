@@ -1,0 +1,33 @@
+spring:
+  profiles:
+    active:
+  freemarker:
+    cache: true
+  datasource:
+    name: mysql_test
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      filters: stat
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/smbms?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=UTC
+      username: root
+      password: root
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: cn.bdqn.dao.smbms2.entity
+
+logging:
+  file: D:/log/core.log
+
+  level:
+    cn.bdqn.dao.smbms2.controller.IndexController: trace
+server:
+  port: 8080
+
+
+oss:
+  appKey: 1
+  appSecret: 1
+  bucket: lynn
+  endPoint: https://www.aliyun.com
